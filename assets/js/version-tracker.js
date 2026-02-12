@@ -201,8 +201,14 @@ class PDFVersionTracker {
 
             const baseName = this.getBaseName(filename);
             const isNew = this.isNewVersion(baseName, version);
-            // Tenta obter o tipo do PDF do elemento
-            const type = element.getAttribute('data-pdf-type') || element.getAttribute('data-pdf-button');
+            // Tenta obter o tipo do PDF (temporada ou agenda)
+            let type = element.getAttribute('data-pdf-type') || element.getAttribute('data-pdf-button');
+
+            // Se não encontrou no elemento, tenta nos filhos (importante para o wrapper no desktop)
+            if (!type) {
+                const childWithType = element.querySelector('[data-pdf-type]');
+                if (childWithType) type = childWithType.getAttribute('data-pdf-type');
+            }
 
             // Cria e adiciona badge
             const badge = this.createBadge(version, isNew, type);

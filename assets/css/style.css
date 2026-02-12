@@ -259,7 +259,7 @@ iframe {
     align-items: center;
     gap: 0.1rem;
     pointer-events: none;
-    transform: rotate(20deg);
+    transform: rotate(25deg);
     transition: transform 0.3s ease;
 }
 
@@ -287,7 +287,7 @@ iframe {
 }
 
 .version-badge:hover {
-    transform: rotate(15deg) scale(1.05);
+    transform: rotate(20deg) scale(1.05);
 }
 
 /* Número da Versão */
@@ -339,9 +339,9 @@ iframe {
 /* Responsividade Mobile */
 @media (max-width: 768px) {
     .version-badge {
-        top: -5px;
-        right: -8px;
-        transform: rotate(15deg);
+        top: -8px;
+        right: -12px;
+        transform: rotate(20deg);
     }
 
     .badge-star {
