@@ -8,9 +8,9 @@ Este é um site simples e moderno para visualização de partituras em PDF, otim
 Para trocar a partitura/arquivo exibido no site, siga este passo simples:
 
 1.  Tenha o seu novo arquivo PDF em mãos.
-2.  Renomeie o arquivo para **`arquivo.pdf`** (tudo minúsculo).
+2.  Renomeie o arquivo para **`Temporada 2026 - OER.pdf`** (respeitando os espaços e maiúsculas).
 3.  Substitua o arquivo existente na pasta:
-    `assets/files/arquivo.pdf`
+    `assets/files/Temporada 2026 - OER.pdf`
 4.  Faça o "commit" e "push" para o GitHub. A atualização aparecerá no site em alguns minutos.
 
 ### Estrutura do Projeto
