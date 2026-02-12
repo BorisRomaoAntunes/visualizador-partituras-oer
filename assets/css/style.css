@@ -55,11 +55,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
-    /* Alinhamento à esquerda */
+    justify-content: space-between;
+    /* Texto na ponta esquerda, Logo na ponta direita */
     align-items: center;
-    gap: 1.5rem;
-    /* Espaço entre logo e texto */
 }
 
 .logo-oer {
