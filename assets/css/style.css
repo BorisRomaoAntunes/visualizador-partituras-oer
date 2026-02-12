@@ -264,8 +264,8 @@ iframe {
 
 /* Estrela do Badge */
 .badge-star {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     clip-path: polygon(50% 0%,
             61% 35%,
@@ -280,7 +280,8 @@ iframe {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    position: relative;
     transition: transform 0.3s ease;
 }
 
@@ -291,7 +292,7 @@ iframe {
 /* Número da Versão */
 .badge-version {
     color: #1a1a1a;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: bold;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     margin-top: 2px;

@@ -1,37 +1,21 @@
 # Visualizador de Partituras OER
 
-Este é um site simples e moderno para visualização de partituras em PDF, otimizado para músicos.
+Este é um site simples e moderno para visualização de partituras em PDF, otimizado para músicos da Orquestra Experimental de Repertório.
 
-## 🚀 Como Usar
+🌐 **Acesse em:** [https://borisromaoantunes.github.io/visualizador-partituras-oer/](https://borisromaoantunes.github.io/visualizador-partituras-oer/)
 
-### Atualizar o Arquivo PDF
-Para trocar a partitura/arquivo exibido no site, siga este passo simples:
+## 🚀 Como Atualizar os PDFs
 
-1.  Tenha o seu novo arquivo PDF em mãos.
-2.  Renomeie o arquivo para **`Temporada 2026 - OER.pdf`** (respeitando os espaços e maiúsculas).
-3.  Substitua o arquivo existente na pasta:
-    `assets/files/Temporada 2026 - OER.pdf`
-4.  Faça o "commit" e "push" para o GitHub. A atualização aparecerá no site em alguns minutos.
+Para trocar a partitura ou agenda no site:
 
-### Estrutura do Projeto
+1.  Coloque o novo arquivo PDF na pasta `assets/files/`.
+2.  O nome deve terminar com a versão, ex: `Arquivo_v2.pdf`.
+3.  Abra o arquivo `pdf-config.json` e atualize o nome do arquivo correspondente.
+4.  Faça o **commit** e **push** para o GitHub.
+5.  O site atualizará automaticamente em 1 minuto!
 
--   **index.html**: Código principal da página.
--   **assets/css/style.css**: Estilos e design do site (Tema Escuro).
--   **assets/files/**: Pasta onde fica o arquivo PDF.
+## 🛠 Estrutura
 
-## 🌐 Hospedagem (GitHub Pages)
-
-Para colocar este site no ar gratuitamente pelo GitHub:
-
-1.  Crie um repositório no GitHub.
-2.  Suba os arquivos deste projeto para lá.
-3.  Vá em **Settings** (Configurações) do repositório.
-4.  No menu lateral, clique em **Pages**.
-5.  Em **Source**, selecione a branch `main` (ou `master`) e a pasta `/ (root)`.
-6.  Clique em **Save**.
-7.  Aguarde alguns instantes e o GitHub fornecerá o link do seu site!
-
-## 📱 Celular vs Computador
-
--   **Computador**: O PDF é exibido diretamente na página.
--   **Celular**: Aparecerá um botão grande "Abrir PDF em Tela Cheia" para melhor experiência de leitura no dispositivo móvel.
+-   **index.html**: Interface principal.
+-   **pdf-config.json**: Configuração dinâmica de quais arquivos exibir.
+-   **assets/js/version-tracker.js**: Sistema inteligente que avisa músicos sobre novas versões ("NOVO").
