@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Partituras</title>
+    <meta name="description" content="Visualizador simples e rápido de partituras e arquivos PDF para músicos.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Google Fonts: Inter para interface limpa e moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1>Partitura Digital</h1>
+            <p>Visualizador OER</p>
+        </div>
+    </header>
+
+    <main class="viewer-container">
+        <!-- Visualização Desktop/Tablet -->
+        <div class="pdf-wrapper">
+            <object data="assets/files/arquivo.pdf" type="application/pdf" width="100%" height="100%">
+                <div class="pdf-fallback">
+                    <p>Seu navegador não suporta visualização de PDF integrada.</p>
+                    <a href="assets/files/arquivo.pdf" class="btn-download" download>Baixar Arquivo PDF</a>
+                </div>
+            </object>
+        </div>
+
+        <!-- Botão Mobile (Visível via CSS em telas pequenas ou como reforço) -->
+        <div class="mobile-controls">
+            <p>Está no celular ou não consegue visualizar?</p>
+            <a href="assets/files/arquivo.pdf" class="btn-download primary" target="_blank">Abrir PDF em Tela Cheia</a>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 Projeto OER. Simples e Acessível.</p>
+    </footer>
+
+</body>
+</html>

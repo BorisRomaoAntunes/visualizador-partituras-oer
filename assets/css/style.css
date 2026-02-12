@@ -1,0 +1,183 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #bb86fc; /* Tom lilás suave, bom contraste no escuro */
+    --secondary-color: #03dac6;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --spacing-unit: 1rem;
+    --header-height: 70px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.main-header {
+    background-color: var(--surface-color);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.main-header p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Main Content */
+.viewer-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-unit);
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - var(--header-height) - 60px); /* Ajuste para viewport cheia menos header/footer */
+}
+
+/* PDF Wrapper */
+.pdf-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    display: flex;
+}
+
+object {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Fallback & Mobile Controls */
+.pdf-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.mobile-controls {
+    display: none; /* Escondido por padrão em Desktop se o PDF carregar */
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.mobile-controls p {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn-download {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--surface-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.btn-download:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.btn-download.primary {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+}
+
+.btn-download.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(187, 134, 252, 0.5);
+    background-color: #a370f7;
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--surface-color);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: auto;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .viewer-container {
+        height: auto;
+        display: block; 
+    }
+
+    .pdf-wrapper {
+        height: 50vh; /* Menor altura em mobile se for exibido */
+        margin-bottom: 2rem;
+        display: none; /* Oculta embed em mobile para focar na experiência nativa */
+    }
+    
+    .mobile-controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh; /* Centraliza botão na tela em mobile */
+    }
+
+    .btn-download.primary {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.1rem;
+    }
+}
