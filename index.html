@@ -30,17 +30,18 @@
         <!-- Grid de Visualizadores (Desktop/Tablet) -->
         <div class="pdf-grid">
             <!-- PDF 1: Temporada -->
-            <div class="pdf-wrapper">
+            <div class="pdf-wrapper" data-pdf-path="assets/files/Temporada 2026 - OER_v1.pdf">
                 <h2 class="pdf-title">Temporada 2026</h2>
-                <iframe src="assets/files/Temporada 2026 - OER.pdf" title="Visualizador de PDF - Temporada 2026">
+                <iframe src="assets/files/Temporada 2026 - OER_v1.pdf" title="Visualizador de PDF - Temporada 2026">
                     <p>Seu navegador não suporta iframes.</p>
                 </iframe>
             </div>
 
             <!-- PDF 2: Agenda de Ensaios -->
-            <div class="pdf-wrapper">
+            <div class="pdf-wrapper" data-pdf-path="assets/files/Agenda_Ensaios_2026_OER_v1.pdf">
                 <h2 class="pdf-title">Agenda de Ensaios</h2>
-                <iframe src="assets/files/Agenda_Ensaios_2026_OER.pdf" title="Visualizador de PDF - Agenda de Ensaios">
+                <iframe src="assets/files/Agenda_Ensaios_2026_OER_v1.pdf"
+                    title="Visualizador de PDF - Agenda de Ensaios">
                     <p>Seu navegador não suporta iframes.</p>
                 </iframe>
             </div>
@@ -50,10 +51,12 @@
         <div class="mobile-controls">
             <p>Está no celular ou não consegue visualizar?</p>
             <div class="mobile-buttons">
-                <a href="assets/files/Temporada 2026 - OER.pdf" class="btn-download primary" download>
+                <a href="assets/files/Temporada 2026 - OER_v1.pdf" class="btn-download primary"
+                    data-pdf-path="assets/files/Temporada 2026 - OER_v1.pdf" download>
                     📅 Temporada 2026
                 </a>
-                <a href="assets/files/Agenda_Ensaios_2026_OER.pdf" class="btn-download primary" download>
+                <a href="assets/files/Agenda_Ensaios_2026_OER_v1.pdf" class="btn-download primary"
+                    data-pdf-path="assets/files/Agenda_Ensaios_2026_OER_v1.pdf" download>
                     🎵 Agenda de Ensaios
                 </a>
             </div>
@@ -64,6 +67,8 @@
         <p>&copy; 2025 Projeto OER. Desenvolvido por Boris Romão Antunes.</p>
     </footer>
 
+    <!-- Sistema de Rastreamento de Versões -->
+    <script src="assets/js/version-tracker.js"></script>
 </body>
 
 </html>

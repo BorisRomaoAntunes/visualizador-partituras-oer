@@ -244,3 +244,116 @@ iframe {
         width: 100%;
     }
 }
+
+/* ============================================
+   BADGES DE VERSÃO
+   ============================================ */
+
+.version-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    pointer-events: none;
+    /* Não interfere com cliques */
+}
+
+/* Estrela do Badge */
+.badge-star {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+    clip-path: polygon(50% 0%,
+            61% 35%,
+            98% 35%,
+            68% 57%,
+            79% 91%,
+            50% 70%,
+            21% 91%,
+            32% 57%,
+            2% 35%,
+            39% 35%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.version-badge:hover .badge-star {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Número da Versão */
+.badge-version {
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 2px;
+}
+
+/* Label "NOVO" */
+.badge-new-label {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #8B0000;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Animação de Pulso para Novos */
+.version-badge.new .badge-star {
+    animation: pulse 2s ease-in-out infinite;
+    border: 2px solid #FFD700;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .version-badge {
+        top: 5px;
+        right: 5px;
+    }
+
+    .badge-star {
+        width: 40px;
+        height: 40px;
+    }
+
+    .badge-version {
+        font-size: 0.65rem;
+    }
+
+    .badge-new-label {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.4rem;
+    }
+}
+
+/* Badge em Botões Mobile */
+.btn-download {
+    position: relative;
+    /* Para posicionar badge */
+}
