@@ -87,17 +87,17 @@ class PDFVersionTracker {
 
     /**
      * Extrai versão do nome do arquivo
-     * Formatos suportados: _v2.pdf, _v2, _2.pdf, _2
+     * Formatos suportados: _v2.pdf, _v2.1.pdf, _v3.2, _2.1, v3.2
      */
     extractVersion(filename) {
         // Remove extensão se houver
         const nameWithoutExt = filename.replace(/\.pdf$/i, '');
 
-        // Tenta padrões: _v2, _2, v2
+        // Tenta padrões: _v2.1, _v2, _2.1, _2, v2.1, v2
         const patterns = [
-            /_v(\d+)$/i,  // _v2
-            /_(\d+)$/,    // _2
-            /v(\d+)$/i    // v2
+            /_v([\d.]+)$/i,  // _v2.1 ou _v2
+            /_([\d.]+)$/,    // _2.1 ou _2
+            /v([\d.]+)$/i    // v2.1 ou v2
         ];
 
         for (const pattern of patterns) {
@@ -116,7 +116,7 @@ class PDFVersionTracker {
     getBaseName(filename) {
         return filename
             .replace(/\.pdf$/i, '')
-            .replace(/_v?\d+$/i, '');
+            .replace(/_v?[\d.]+$/i, ''); // Remove _v2.1, _v2, _2.1, etc
     }
 
     /**
