@@ -235,34 +235,37 @@ class PDFVersionTracker {
         if (window.innerWidth <= 768) return;
 
         const handleInteraction = () => {
-            const badges = document.querySelectorAll('.version-badge');
-            if (badges.length === 0) return;
-
-            badges.forEach(badge => {
-                const element = badge.closest('[data-pdf-path]');
-                if (element) {
-                    const pdfPath = element.getAttribute('data-pdf-path');
-                    if (pdfPath) {
-                        const filename = pdfPath.split('/').pop();
-                        const version = this.extractVersion(filename);
-                        const baseName = this.getBaseName(filename);
-                        if (version) this.markAsSeen(baseName, version);
-                    }
-                }
-
-                // Efeito suave de saída antes de remover
-                badge.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                badge.style.opacity = '0';
-                badge.style.transform = 'translateY(-20px) rotate(30deg) scale(0.8)';
-
-                setTimeout(() => {
-                    if (badge.parentNode) badge.remove();
-                }, 500);
-            });
-
-            // Remove os listeners após a primeira interação
+            // Remove os listeners imediatamente para garantir que o timer seja disparado apenas uma vez
             window.removeEventListener('mousemove', handleInteraction);
             window.removeEventListener('click', handleInteraction);
+
+            // Aguarda 3 segundos antes de iniciar o processo de remoção
+            setTimeout(() => {
+                const badges = document.querySelectorAll('.version-badge');
+                if (badges.length === 0) return;
+
+                badges.forEach(badge => {
+                    const element = badge.closest('[data-pdf-path]');
+                    if (element) {
+                        const pdfPath = element.getAttribute('data-pdf-path');
+                        if (pdfPath) {
+                            const filename = pdfPath.split('/').pop();
+                            const version = this.extractVersion(filename);
+                            const baseName = this.getBaseName(filename);
+                            if (version) this.markAsSeen(baseName, version);
+                        }
+                    }
+
+                    // Efeito suave de saída antes de remover
+                    badge.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    badge.style.opacity = '0';
+                    badge.style.transform = 'translateY(-20px) rotate(30deg) scale(0.8)';
+
+                    setTimeout(() => {
+                        if (badge.parentNode) badge.remove();
+                    }, 500);
+                });
+            }, 3000);
         };
 
         // Adiciona listeners globais
