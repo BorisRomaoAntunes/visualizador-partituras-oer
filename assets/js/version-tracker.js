@@ -1,24 +1,88 @@
 /**
  * Sistema de Rastreamento de Versões de PDFs
  * Extrai versão do nome do arquivo e exibe badges com indicador "NOVO"
+ * Carrega PDFs dinamicamente a partir de pdf-config.json
  */
 
 class PDFVersionTracker {
     constructor() {
         this.storageKey = 'oer_pdf_versions';
+        this.configPath = 'pdf-config.json';
         this.init();
     }
 
     /**
      * Inicializa o sistema
      */
-    init() {
+    async init() {
         // Aguarda DOM carregar
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.setupBadges());
+            document.addEventListener('DOMContentLoaded', () => this.start());
         } else {
+            await this.start();
+        }
+    }
+
+    /**
+     * Inicia o carregamento dinâmico
+     */
+    async start() {
+        try {
+            // Carrega configuração de PDFs
+            const config = await this.loadConfig();
+
+            // Atualiza iframes e botões com PDFs do config
+            this.updatePDFElements(config);
+
+            // Configura badges após carregar PDFs
+            this.setupBadges();
+        } catch (error) {
+            console.error('Erro ao carregar configuração de PDFs:', error);
+            // Se falhar, tenta configurar badges com elementos existentes
             this.setupBadges();
         }
+    }
+
+    /**
+     * Carrega arquivo de configuração JSON
+     */
+    async loadConfig() {
+        const response = await fetch(this.configPath);
+        if (!response.ok) {
+            throw new Error(`Erro ao carregar ${this.configPath}: ${response.status}`);
+        }
+        return await response.json();
+    }
+
+    /**
+     * Atualiza elementos HTML com PDFs da configuração
+     */
+    updatePDFElements(config) {
+        const { pdfs } = config;
+
+        // Atualiza cada tipo de PDF
+        Object.keys(pdfs).forEach(tipo => {
+            const pdfInfo = pdfs[tipo];
+            const caminhoPDF = `assets/files/${pdfInfo.arquivo}`;
+
+            // Atualiza iframes (desktop)
+            const iframes = document.querySelectorAll(`[data-pdf-type="${tipo}"]`);
+            iframes.forEach(iframe => {
+                iframe.src = caminhoPDF;
+                // Atualiza também o wrapper para badges
+                const wrapper = iframe.closest('.pdf-wrapper');
+                if (wrapper) {
+                    wrapper.setAttribute('data-pdf-path', caminhoPDF);
+                }
+            });
+
+            // Atualiza botões mobile
+            const botoes = document.querySelectorAll(`[data-pdf-button="${tipo}"]`);
+            botoes.forEach(botao => {
+                botao.href = caminhoPDF;
+                botao.setAttribute('data-pdf-path', caminhoPDF);
+            });
+        });
     }
 
     /**
@@ -28,7 +92,7 @@ class PDFVersionTracker {
     extractVersion(filename) {
         // Remove extensão se houver
         const nameWithoutExt = filename.replace(/\.pdf$/i, '');
-        
+
         // Tenta padrões: _v2, _2, v2
         const patterns = [
             /_v(\d+)$/i,  // _v2
@@ -84,12 +148,12 @@ class PDFVersionTracker {
      */
     isNewVersion(baseName, currentVersion) {
         if (!currentVersion) return false;
-        
+
         const savedVersions = this.loadSavedVersions();
         const savedVersion = savedVersions[baseName];
-        
+
         if (!savedVersion) return true; // Primeira vez vendo
-        
+
         return parseInt(currentVersion) > parseInt(savedVersion);
     }
 
@@ -123,21 +187,21 @@ class PDFVersionTracker {
     setupBadges() {
         // Encontra todos os elementos com PDFs
         const pdfElements = document.querySelectorAll('[data-pdf-path]');
-        
+
         pdfElements.forEach(element => {
             const pdfPath = element.getAttribute('data-pdf-path');
             const filename = pdfPath.split('/').pop();
-            
+
             const version = this.extractVersion(filename);
             if (!version) return; // Sem versão no nome
-            
+
             const baseName = this.getBaseName(filename);
             const isNew = this.isNewVersion(baseName, version);
-            
+
             // Cria e adiciona badge
             const badge = this.createBadge(version, isNew);
             element.appendChild(badge);
-            
+
             // Adiciona listener para marcar como visto ao clicar
             element.addEventListener('click', () => {
                 this.markAsSeen(baseName, version);
