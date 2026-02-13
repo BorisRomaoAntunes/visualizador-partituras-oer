@@ -171,17 +171,29 @@ class PDFVersionTracker {
      */
     createBadge(version, isNew, type) {
         const badge = document.createElement('div');
-        badge.className = 'version-badge' + (isNew ? ' new' : '');
+        badge.className = 'version-badge';
+        if (isNew) badge.classList.add('new');
 
-        // Define o texto do rótulo baseado no tipo
-        const labelText = type === 'temporada' ? 'ATUALIZAÇÃO TEMPORADA' : 'ATUALIZAÇÃO AGENDA';
+        // Cria a estrela do badge
+        const badgeStar = document.createElement('div');
+        badgeStar.className = 'badge-star';
 
-        badge.innerHTML = `
-            <div class="badge-star">
-                <span class="badge-version">v${version}</span>
-            </div>
-            ${isNew ? `<span class="badge-new-label">${labelText}</span>` : ''}
-        `;
+        const versionSpan = document.createElement('span');
+        versionSpan.className = 'badge-version';
+        versionSpan.textContent = `v${version}`;
+
+        badgeStar.appendChild(versionSpan);
+        badge.appendChild(badgeStar);
+
+        // Se for novo, adiciona o label
+        if (isNew) {
+            const labelText = type === 'temporada' ? 'ATUALIZAÇÃO TEMPORADA' : 'ATUALIZAÇÃO AGENDA';
+            const labelSpan = document.createElement('span');
+            labelSpan.className = 'badge-new-label';
+            labelSpan.textContent = labelText;
+            badge.appendChild(labelSpan);
+        }
+
         return badge;
     }
 
